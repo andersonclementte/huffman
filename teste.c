@@ -67,11 +67,12 @@ void huff_test() {
 	// testando build_huff_tree
 	build_huff_tree(riptest);
 	CU_ASSERT(1==riptest->size);
-
+	
 }
 
 int run_tests() {
     heap_test();
+	huff_test();
 
 }
 

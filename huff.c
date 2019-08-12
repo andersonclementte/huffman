@@ -5,35 +5,26 @@
 void check_frequency(char *str, heap *rip)
 {
   int frequency = 0, i, lenght;
+  int array_freq[256];
+  for(i=0;i<256;i++)
+  {
+    array_freq[i]=0;
+  }
   char aux;
   lenght=strlen(str);
   for ( i = 0; i < lenght; i++)
   {
-    if(str[i]!='*')
-    {
-      aux=str[i];
-      break;
-    }
-    
+    array_freq[str[i]]++;
   }
-  //se der erro, vamos usar o \n
- 
-  if(i==lenght)
-    {
-      return;
-    }
-  for ( i = 0; i < lenght; i++)
+  for(i=0;i<256;i++)
   {
-    if(str[i]==aux)
+    if(array_freq[i]!=0)
     {
-      frequency++;
-      str[i]='*';
+      aux=i;
+      node *new=create_node(aux,array_freq[i],NULL,NULL);
+      enqueue(rip, new);
     }
   }
-  node *new=create_node(aux,frequency,NULL,NULL);
-  enqueue(rip, new);
-
-  check_frequency(str, rip);
 
 }
 
