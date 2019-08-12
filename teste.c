@@ -19,7 +19,10 @@ int clear_suite(void) {
 void testandoTeste() {
 	char expected_string = "f:21 c:* f:9 c:* f:4 c:C f:5 c:B f:12 c:* f:6 c:* f:3 c:D f:3 c:* f:1 c:F f:2 c:E f:6 c:A ";
 	CU_ASSERT_STRING_EQUAL(expected_string, print_preorder(rip->items[1]));
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 4f18e2762eba3d00e7518d6b55c867d46217de2b
 }
 
 int run_tests() {
