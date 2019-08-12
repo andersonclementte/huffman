@@ -295,6 +295,7 @@ int main()
   build_huff_tree(rip);
 
   print_preorder(rip->items[1]);
+  printf("\n");
 
 
 
