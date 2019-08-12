@@ -49,9 +49,25 @@ void heap_test() {
 }
 
 void huff_test() {
-	test=create_node('a',10,NULL,NULL);
-
 	
+	//testando check_frequency
+	char str[22]="AAAAAABBBBBCCCCDDDEEF";
+	heap *riptest=create_heap();
+	check_frequency(str,riptest);
+	CU_ASSERT('F' == riptest->items[1]->data);
+	CU_ASSERT(1 == riptest->items[1]->frequency);
+	CU_ASSERT('E' == riptest->items[3]->data);
+	CU_ASSERT(2 == riptest->items[3]->frequency);
+
+	//testando merge
+	node* merged=merge(riptest->items[1],riptest->items[3]);
+	CU_ASSERT('*' == merged->data);
+	CU_ASSERT(3 == merged->frequency);
+
+	// testando build_huff_tree
+	build_huff_tree(riptest);
+	CU_ASSERT(1==riptest->size);
+
 }
 
 int run_tests() {
@@ -77,6 +93,10 @@ int main(void) {
 		return CU_get_error();
 	}
 
+	if(NULL == CU_add_test(pSuite, "huff_test", huff_test)) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
 	
 
 	CU_basic_run_tests();
