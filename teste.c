@@ -17,15 +17,46 @@ int clear_suite(void) {
 	return 0;
 }
 
-void testandodaddy() {
-	CU_ASSERT(5==daddy(10));
-	CU_ASSERT(4==daddy(8));
-	CU_ASSERT(3==daddy(7));
+
+
+void heap_test() {
+	heap* rip=create_heap();
+
+	//testando create_heap
+	CU_ASSERT(0 == rip->size);
+	CU_ASSERT(NULL != rip);
+	CU_ASSERT(1==isempty(rip));
+
+	//testando enqueue
+	node* test=create_node('a',10,NULL,NULL);
+	enqueue(rip,test);
+	node* test2=create_node('b',12,NULL,NULL);
+	enqueue(rip,test2);
+	node* test3=create_node('c',7,NULL,NULL);
+	enqueue(rip,test3);
+	CU_ASSERT('c' == rip->items[1]->data);
+	CU_ASSERT(12 == rip->items[2]->frequency);
+
+	//testando dequeue
+	node* test4=dequeue(rip);
+	CU_ASSERT('c' == test4->data);
+	test4=dequeue(rip);
+	CU_ASSERT(10==test4->frequency);
+	test4=dequeue(rip);
+	test4=dequeue(rip);
+	CU_ASSERT(NULL==test4);
+	
+}
+
+void huff_test() {
+	test=create_node('a',10,NULL,NULL);
+
 	
 }
 
 int run_tests() {
-    testandodaddy();
+    heap_test();
+
 }
 
 int main(void) {
@@ -41,10 +72,12 @@ int main(void) {
 		return CU_get_error();
 	}
 
-    if(NULL == CU_add_test(pSuite, "testandodaddy", testandodaddy)) {
+    if(NULL == CU_add_test(pSuite, "heap_test", heap_test)) {
 		CU_cleanup_registry();
 		return CU_get_error();
 	}
+
+	
 
 	CU_basic_run_tests();
 	CU_cleanup_registry();

@@ -132,7 +132,7 @@ node* dequeue(heap * rip)
 {
     if(isempty(rip))
     {
-        printf("underflow\n");
+        //printf("underflow\n");
         return NULL;
     }
     else
