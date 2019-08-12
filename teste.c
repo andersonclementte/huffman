@@ -8,11 +8,6 @@
 #include "./tree.h"
 #include "./heap.h"
 
-int daddy(int i)
-{
-    return i/2;
-}
-
 
 int init_suite(void) {
 	return 0;
