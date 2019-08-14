@@ -27,7 +27,7 @@ int main()
   build_huff_tree(rip);
   hash *ht=create_hash_table();
   navigate(rip->items[1],binary,0,ht);
-  //print_preorder(rip->items[1]);
+  print_preorder(rip->items[1]);
   printf("\n");
 
   print_hash(ht);

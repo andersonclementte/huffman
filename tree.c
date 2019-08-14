@@ -20,10 +20,13 @@ void print_preorder(node * tree)
 {
   if (tree) 
   {     
-    printf("f:%d c:%c ",tree->frequency, tree->data);
+    printf("( f:%d c:%c ",tree->frequency, tree->data);
     print_preorder(tree->left);
     print_preorder(tree->right);
+    printf(") ");
   }
+  else
+  printf("()");
     
  }
 
@@ -50,7 +53,7 @@ void print_preorder(node * tree)
 
    if(is_leaf(root))
    {
-     put_bin_on_hash(ht, root->data,binary);
+     put_bin_on_hash(ht, root->data,binary,i);
    }
  }
 

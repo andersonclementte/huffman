@@ -11,11 +11,11 @@ hash* create_hash_table() {
 	return hashtable;
 }
 
-void put_bin_on_hash(hash *ht, unsigned char key, char b[])
+void put_bin_on_hash(hash *ht, unsigned char key, char b[],int size)
 {
     int i;
     element *new=(element*)malloc(sizeof(element));
-    for(i=0;i<strlen(b);i++)
+    for(i=0;i<size;i++)
     {
         new->bin[i]=b[i];
     }
@@ -28,7 +28,7 @@ void print_hash(hash *ht)
   int i;
   for(i=0;i<256;i++)
   {
-      if(ht->table[i]->bin[0] != '*')
+      if(ht->table[i] != NULL)
       {
         printf("%c: %s", i, ht->table[i]->bin);
         printf("\n"); 
