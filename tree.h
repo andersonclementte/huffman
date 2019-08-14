@@ -17,4 +17,8 @@ node* create_node(char item, int freq, node* l, node* r);
 
 void print_preorder(node * tree);
 
+void navigate(node *root, unsigned char binary[], int i, hash *ht);
+
+int is_leaf(node *tree);
+
 #endif

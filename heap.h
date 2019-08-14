@@ -1,8 +1,6 @@
 #ifndef heap_h
 #define heap_h
 #include "./header.h"
-#include "./huff.h"
-#include "./tree.h"
 
 
 struct heap

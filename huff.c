@@ -21,6 +21,10 @@ void check_frequency(char *str, heap *rip)
     if(array_freq[i]!=0)
     {
       aux=i;
+      if(aux == '*')
+      {
+        aux='*\\';
+      }
       node *new=create_node(aux,array_freq[i],NULL,NULL);
       enqueue(rip, new);
     }

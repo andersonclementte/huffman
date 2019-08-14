@@ -1,8 +1,6 @@
 #ifndef huff_h
 #define huff_h
 #include "./header.h"
-#include "./tree.h"
-#include "./heap.h"
 
 void check_frequency(char *str, heap *rip);
 

@@ -1,11 +1,9 @@
 #include "./header.h"
-#include "./huff.h"
-#include "./tree.h"
-#include "./heap.h"
 
 int main()
 {
   char teste[22]="AAAAAABBBBBCCCCDDDEEF";
+  char binary[8];
   heap*rip = create_heap();
   check_frequency(teste, rip);
   print_heap(rip->size, rip);
@@ -27,8 +25,11 @@ int main()
   print_heap(rip->size, rip);
 */
   build_huff_tree(rip);
-
-  print_preorder(rip->items[1]);
+  hash *ht=create_hash_table();
+  navigate(rip->items[1],binary,0,ht);
+  //print_preorder(rip->items[1]);
   printf("\n");
+
+  print_hash(ht);
 }
 
