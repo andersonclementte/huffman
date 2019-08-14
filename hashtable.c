@@ -6,7 +6,7 @@ hash* create_hash_table() {
     int i;
     for(i=0;i<256;i++)
     {
-        hashtable->table[i]->bin[0]='*';
+        hashtable->table[i]=NULL;
     }
 	return hashtable;
 }
@@ -14,15 +14,17 @@ hash* create_hash_table() {
 void put_bin_on_hash(hash *ht, unsigned char key, char b[])
 {
     int i;
+    element *new=(element*)malloc(sizeof(element));
     for(i=0;i<strlen(b);i++)
     {
-        ht->table[key]->bin[i]=b[i];
-    } 
+        new->bin[i]=b[i];
+    }
+    ht->table[key]=new;
+
 }
 
 void print_hash(hash *ht)
 {
-  hash* aux=ht;
   int i;
   for(i=0;i<256;i++)
   {

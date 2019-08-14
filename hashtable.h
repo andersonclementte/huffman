@@ -13,7 +13,7 @@ struct hash {
 
 hash* create_hash_table();
 
-void put(hash *ht, unsigned char key, char b[]);
+void put_bin_on_hash(hash *ht, unsigned char key, char b[]);
 
 void print_hash(hash *ht);
 
