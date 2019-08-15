@@ -2,7 +2,9 @@
 
 int main()
 {
-  char teste[22]="AAAAAABBBBBCCCCDDDEEF";
+  char * teste;
+  teste=malloc(sizeof(char)*1000);
+  fgets(teste, 1000, stdin);
   char binary[8];
   heap*rip = create_heap();
   check_frequency(teste, rip);
