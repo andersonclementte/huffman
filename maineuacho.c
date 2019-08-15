@@ -2,12 +2,13 @@
 
 int main()
 {
-  char * teste;
-  teste=malloc(sizeof(char)*1000);
+  unsigned char * teste;
+  teste=malloc(sizeof(unsigned char)*1000);
   fgets(teste, 1000, stdin);
-  char binary[8];
+  unsigned char binary[8];
   heap*rip = create_heap();
   check_frequency(teste, rip);
+  printf("%c\n",rip->items[1]->data);
   print_heap(rip->size, rip);
   /* printf("%s\n", teste);
   node *x=dequeue(rip);

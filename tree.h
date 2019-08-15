@@ -6,14 +6,14 @@
 
 struct node
 {
-    char data;
+    void * data;
     int frequency;
     node* left;
     node* right;
 
 };
 
-node* create_node(char item, int freq, node* l, node* r);
+node* create_node(void * item, int freq, node* l, node* r);
 
 void print_preorder(node * tree);
 

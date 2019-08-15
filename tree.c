@@ -4,7 +4,7 @@
 
 
 
-node* create_node(char item, int freq, node* l, node* r)
+node* create_node(void * item, int freq, node* l, node* r)
 {
   node* new=(node*) malloc(sizeof(node));
   new->data=item;

@@ -52,12 +52,14 @@ void heap_test() {
 void huff_test() {
 	
 	//testando check_frequency
-	char str[22]="AAAAAABBBBBCCCCDDDEEF";
+	unsigned char str[22]="AAAAAABBBBBCCCCDDDEEF";
 	heap *riptest=create_heap();
 	check_frequency(str,riptest);
-	CU_ASSERT('F' == riptest->items[1]->data);
+	unsigned char testchar[1] = "F";
+	CU_ASSERT_STRING_EQUAL(testchar, riptest->items[1]->data);
 	CU_ASSERT(1 == riptest->items[1]->frequency);
-	CU_ASSERT('E' == riptest->items[3]->data);
+	testchar[1]="E";
+	CU_ASSERT(testchar == riptest->items[3]->data);
 	CU_ASSERT(2 == riptest->items[3]->frequency);
 
 	//testando merge

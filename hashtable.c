@@ -11,7 +11,7 @@ hash* create_hash_table() {
 	return hashtable;
 }
 
-void put_bin_on_hash(hash *ht, unsigned char key, char b[],int size)
+void put_bin_on_hash(hash *ht, unsigned char key, unsigned char b[],int size)
 {
     int i;
     element *new=(element*)malloc(sizeof(element));

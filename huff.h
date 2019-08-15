@@ -2,7 +2,7 @@
 #define huff_h
 #include "./header.h"
 
-void check_frequency(char *str, heap *rip);
+void check_frequency(unsigned char *str, heap *rip);
 
 node* merge(node *a, node *b);
 

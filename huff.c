@@ -2,7 +2,7 @@
 #include "./huff.h"
 
 
-void check_frequency(char *str, heap *rip)
+void check_frequency(unsigned char *str, heap *rip)
 {
   int frequency = 0, i, lenght;
   int array_freq[256];
@@ -10,7 +10,7 @@ void check_frequency(char *str, heap *rip)
   {
     array_freq[i]=0;
   }
-  char aux;
+  unsigned char aux;
   lenght=strlen(str);
   for ( i = 0; i < lenght-1; i++)
   {
