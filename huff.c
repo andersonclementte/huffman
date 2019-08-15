@@ -1,12 +1,11 @@
 #include "./header.h"
 #include "./huff.h"
 
-
 void check_frequency(unsigned char *str, heap *rip)
 {
   int frequency = 0, i, lenght;
   int array_freq[256];
-  for(i=0;i<256;i++)
+  for(i=0;i<256;i++) 
   {
     array_freq[i]=0;
   }
@@ -23,13 +22,12 @@ void check_frequency(unsigned char *str, heap *rip)
       aux=i;
       if(aux == '*')
       {
-        aux='*\\';
+        aux='\\*';
       }
       node *new=create_node(aux,array_freq[i],NULL,NULL);
       enqueue(rip, new);
     }
   }
-
 }
 
 node* merge(node *a, node *b)

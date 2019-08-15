@@ -1,6 +1,5 @@
 #include "./header.h"
 
-
 hash* create_hash_table() {
 	hash *hashtable = (hash*) malloc(sizeof(hash));
     int i;
@@ -8,7 +7,7 @@ hash* create_hash_table() {
     {
         hashtable->table[i]=NULL;
     }
-	return hashtable;
+	return hashtable; 
 }
 
 void put_bin_on_hash(hash *ht, unsigned char key, unsigned char b[],int size)
@@ -20,7 +19,6 @@ void put_bin_on_hash(hash *ht, unsigned char key, unsigned char b[],int size)
         new->bin[i]=b[i];
     }
     ht->table[key]=new;
-
 }
 
 void print_hash(hash *ht)

@@ -1,7 +1,6 @@
 #include "./header.h"
 #include "./heap.h"
 
-
 heap * create_heap()
 {
     heap *new= malloc(sizeof(heap));
@@ -79,11 +78,10 @@ void build_min_heap(heap* rip)
     for ( i = rip->size/2; i >= 1; i--)
     {
         min_heapfy(rip, i);
-    }
-   
+    }   
 }
  
- void print_heap(int n, heap * rip)
+void print_heap(int n, heap * rip)
 {
     int i;
     int num;
@@ -137,14 +135,10 @@ node* dequeue(heap * rip)
     }
     else
     {
-        node* item=rip->items[1];
+        node* dequeued=rip->items[1];
         rip->items[1]=rip->items[rip->size];
         rip->size--;
-
         min_heapfy(rip, 1);
-
-        return item;
-
-    }
-    
+        return dequeued;
+    }  
 }

@@ -1,9 +1,6 @@
 #include "./header.h"
 #include "./tree.h"
 
-
-
-
 node* create_node(void * item, int freq, node* l, node* r)
 {
   node* new=(node*) malloc(sizeof(node));
@@ -11,10 +8,8 @@ node* create_node(void * item, int freq, node* l, node* r)
   new->frequency=freq;
   new->left=l;
   new->right=r;
-
   return new;
 }
-
 
 void print_preorder(node * tree) 
 {
@@ -26,9 +21,10 @@ void print_preorder(node * tree)
     printf(") ");
   }
   else
-  printf("()");
-    
- }
+  {
+    printf("()");    
+  }
+}
 
  int is_leaf(node *tree)
  {
