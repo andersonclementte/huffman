@@ -7,6 +7,7 @@
 #include "./huff.h"
 #include "./tree.h"
 #include "./heap.h"
+#include "./hashtable.h"
 
 
 int init_suite(void) {
@@ -70,9 +71,30 @@ void huff_test() {
 	
 }
 
+void hash_test()
+{
+	//testando criação da hash create_hash_table();
+	hash * test_hash = create_hash_table();
+	CU_ASSERT(NULL==test_hash->table[0]);
+	CU_ASSERT(NULL==test_hash->table[255]);
+	CU_ASSERT(NULL==test_hash->table[150]);
+
+	//testando put bin on hash para ver se a inserção do binario ta certa
+	 unsigned char biny[5]="0011";
+	put_bin_on_hash(test_hash, 'a', biny, 4);
+	CU_ASSERT_STRING_EQUAL(test_hash->table['a']->bin,biny);
+	unsigned char biny2[5]="00";
+	put_bin_on_hash(test_hash, 'b', biny2, 2);
+	CU_ASSERT_STRING_EQUAL(test_hash->table['b']->bin,biny2);
+	
+
+
+}
+
 int run_tests() {
     heap_test();
 	huff_test();
+	hash_test();
 
 }
 
@@ -95,6 +117,10 @@ int main(void) {
 	}
 
 	if(NULL == CU_add_test(pSuite, "huff_test", huff_test)) {
+		CU_cleanup_registry();
+		return CU_get_error();
+	}
+	if(NULL == CU_add_test(pSuite, "hash_test", hash_test)) {
 		CU_cleanup_registry();
 		return CU_get_error();
 	}

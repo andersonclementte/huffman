@@ -10,4 +10,4 @@ compile_tree:
 	   gcc $(UTILS) $(HUFF) $(HEAP) $(TREE) $(MAIN) $(HASH) -o tree -lm -w
 
 compile_test:
-		gcc $(UTILS) $(HUFF) $(HEAP) $(TREE) $(TEST) -o test -lm -w -lcunit
+		gcc $(UTILS) $(HUFF) $(HEAP) $(TREE) $(TEST) $(HASH) -o test -lm -w -lcunit
