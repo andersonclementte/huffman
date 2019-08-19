@@ -2,7 +2,7 @@
 #define compress_h
 #include "./header.h"
 
-void compress(unsigned char uncomp_archive_name);
+void compress(unsigned char * uncomp_archive_name);
 
 
 #endif

@@ -11,7 +11,7 @@ void check_frequency(unsigned char *str, heap *rip)
   }
   unsigned char aux;
   lenght=strlen(str);
-  for ( i = 0; i < lenght-1; i++)
+  for ( i = 0; i < lenght; i++)
   {
     array_freq[str[i]]++;
   }

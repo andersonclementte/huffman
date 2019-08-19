@@ -2,11 +2,10 @@
 
 int main()
 {
-  unsigned char * teste, arquivo[100];
-  teste=malloc(sizeof(unsigned char)*1000);
+  unsigned char arquivo[100];
   int option;
   printf("Welcome to Zip Zop:\n");
-  printf("Choose your destiny:\n (1) - Compress\n(2) - Descompress\n");
+  printf("Choose your destiny:\n(1) - Compress\n(2) - Descompress\n");
   scanf("%d", &option);
   
   switch(option){
