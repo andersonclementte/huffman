@@ -7,6 +7,7 @@
 #include "./tree.h"
 #include "./heap.h"
 #include "./hashtable.h"
+#include "./compress.h"
 
 typedef struct node node;
 typedef struct heap heap;

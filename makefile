@@ -5,9 +5,10 @@ TREE = tree.h tree.c
 MAIN = maineuacho.c
 TEST = teste.c
 HASH = hashtable.h hashtable.c
+COMPRESS = compress.h compress.h
 
 compile_tree:
-	   gcc $(UTILS) $(HUFF) $(HEAP) $(TREE) $(MAIN) $(HASH) -o tree -lm -w
+	   gcc $(UTILS) $(HUFF) $(HEAP) $(TREE) $(MAIN) $(HASH) $(COMPRESS) -o tree -lm -w
 
 compile_test:
 		gcc $(UTILS) $(HUFF) $(HEAP) $(TREE) $(TEST) $(HASH) -o test -lm -w -lcunit

@@ -2,37 +2,23 @@
 
 int main()
 {
-  unsigned char * teste;
+  unsigned char * teste, arquivo[100];
   teste=malloc(sizeof(unsigned char)*1000);
-  fgets(teste, 1000, stdin);
-  unsigned char binary[8];
-  heap*rip = create_heap();
-  check_frequency(teste, rip);
-  printf("%c\n",rip->items[1]->data);
-  print_heap(rip->size, rip);
-  /* printf("%s\n", teste);
-  node *x=dequeue(rip);
-  printf("%d %c\n", x->frequency, x->data);
-  print_heap(rip->size, rip);
-  x=dequeue(rip);
-  printf("%d %c\n", x->frequency, x->data);
-  print_heap(rip->size, rip);
-  x=dequeue(rip);
-  printf("%d %c\n", x->frequency, x->data);
-  print_heap(rip->size, rip);
-  x=dequeue(rip);
-  printf("%d %c\n", x->frequency, x->data);
-  print_heap(rip->size, rip);
-  x=dequeue(rip);
-  printf("%d %c\n", x->frequency, x->data);
-  print_heap(rip->size, rip);
-*/
-  build_huff_tree(rip);
-  hash *ht=create_hash_table();
-  navigate(rip->items[1],binary,0,ht);
-  print_preorder(rip->items[1]);
-  printf("\n");
+  int option;
+  printf("Welcome to Zip Zop:\n");
+  printf("Choose your destiny:\n (1) - Compress\n(2) - Descompress\n");
+  scanf("%d", &option);
+  
+  switch(option){
+    case 1: 
+            printf("Digite o nome do arquivo que deseja compactar:\n");
+            scanf(" %[^\n]s", arquivo);
+            compress(arquivo);
+            break;
+    case 2:
+            break;
+    default: printf("invalido\n");
+  }
 
-  print_hash(ht);
 }
 
