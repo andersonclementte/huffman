@@ -22,5 +22,7 @@ It proceeds until the heap size is bigger than one
 */
 void build_huff_tree(heap *rip);
 
+int tree_size(node* tree);
+
 #endif
 

@@ -17,6 +17,38 @@ unsigned char *get_new_bin(hash *ht, unsigned char c)
     return ht->table[c]->bin;
 }
 
+void print_tree_header(FILE *compressed_archive, node* tree)
+{
+    if(tree != NULL)
+    {
+        fprintf(compressed_archive,"%c", tree->data);
+        print_tree_header(compressed_archive,tree->left);
+        print_tree_header(compressed_archive,tree->right);
+    }
+}
+
+void print_trash_treesize(FILE *compressed_archive, unsigned char *bits)
+{
+    int i;
+    unsigned char byte =0;
+    int bit_index = 7;
+    for(i=0;i<16;i++)
+    {
+        if(bits[i] != '0')
+        {
+            byte = set_bit(byte,bit_index);
+        }
+        bit_index--;
+
+        if(bit_index<0)
+        {
+            bit_index=7;
+            fprintf(compressed_archive,"%c", byte);
+            byte=0;   
+        }
+    }
+}
+
 int write_compressed_file(FILE *archive, FILE *compressed_archive, hash *ht)
 {
     unsigned char byte=0, byteread;
@@ -75,11 +107,11 @@ void compress(unsigned char *uncomp_archive_name)
 	rewind(archive);
     unsigned char* file_bin= malloc(sizeof(char)* fileSize);
     fread(file_bin,1,fileSize,archive);
-    printf("%s\n", file_bin);
-    unsigned char comp_archive[100];
+    unsigned char *comp_archive= malloc(sizeof(char) *100);
     strcat(uncomp_archive_name, ".huff");
+    strcpy(comp_archive, uncomp_archive_name);
     FILE *compressed_archive=fopen(comp_archive,"wb");
-    fprintf(comp_archive, "00"); // Reserves the first 16 bits.
+    fprintf(compressed_archive, "00"); // Reserves the first 16 bits.*/
     heap*rip = create_heap();
     check_frequency(file_bin, rip);
     print_heap(rip->size, rip);
@@ -88,14 +120,38 @@ void compress(unsigned char *uncomp_archive_name)
     unsigned char binary[8];
     navigate(rip->items[1],binary,0,ht);
 
+    //tree_header
+    printf("%s\n", file_bin);
+    int tree_sizeeesss=tree_size(rip->items[1]);
+    printf(" tree size: %d\n", tree_sizeeesss);
+    print_tree_header(compressed_archive, rip->items[1]);
+    unsigned char tree_header_size[13];
+    int_to_bin(tree_header_size, tree_sizeeesss,13);
+    //trash header
     unsigned int trash=write_compressed_file(archive,compressed_archive,ht);
     unsigned char trash_size[4];
     int_to_bin(trash_size,trash,3);
+    trash_size[3]='\0';
+    
+    //constructing header
+    char header[17]="";
+    strcpy(header,trash_size);
+    header[3]='\0';
+    strcat(header,tree_header_size);
+    header[16]='\0';
+    rewind(compressed_archive);
 
-    char header[17];
+    print_trash_treesize(compressed_archive,header);
+
+    fclose(archive);
+    fclose(compressed_archive);
+
+    printf("funciona pfv\n");
+    
+
     //print_preorder(rip->items[1]);
     //printf("\n");
-    //print_hash(ht);
+    print_hash(ht);
 
     
 }

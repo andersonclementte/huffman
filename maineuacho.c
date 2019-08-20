@@ -19,5 +19,8 @@ int main()
     default: printf("invalido\n");
   }
 
+
+  return 0;
+
 }
 
