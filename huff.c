@@ -55,3 +55,16 @@ void build_huff_tree(heap *rip)
   }
   
 }
+
+int tree_size(node* tree)
+{
+  if(tree==NULL)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1+tree_size(tree->left)+tree_size(tree->right);
+  }
+  
+}
