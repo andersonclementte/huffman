@@ -152,12 +152,12 @@ void compress(unsigned char *uncomp_archive_name)
     fclose(archive);
     fclose(compressed_archive);
 
-    printf("funciona pfv\n");
+    printf("\nfunciona pfv");
     
 
     //print_preorder(rip->items[1]);
     printf("\n");
-    print_hash(ht);
-    printf("aqui\n");
+    //print_hash(ht);
+    //printf("aqui\n");
     return;
 }
