@@ -1,7 +1,7 @@
 #include "./header.h"
 #include "./tree.h"
 
-node* create_node(void * item, int freq, node* l, node* r)
+node* create_node(void * item, long long int freq, node* l, node* r)
 {
   node* new=(node*) malloc(sizeof(node));
   new->data=item;

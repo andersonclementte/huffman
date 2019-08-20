@@ -3,7 +3,7 @@
 
 void check_frequency(unsigned char *str, heap *rip)
 {
-  int frequency = 0, i, lenght;
+  long long int frequency = 0, i, lenght;
   int array_freq[256];
   for(i=0;i<256;i++) 
   {

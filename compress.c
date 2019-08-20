@@ -114,7 +114,7 @@ void compress(unsigned char *uncomp_archive_name)
     fprintf(compressed_archive, "00"); // Reserves the first 16 bits.*/
     heap*rip = create_heap();
     check_frequency(file_bin, rip);
-    print_heap(rip->size, rip);
+   //print_heap(rip->size, rip);
     build_huff_tree(rip);
     hash *ht=create_hash_table();
     unsigned char binary[8];

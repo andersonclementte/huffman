@@ -7,7 +7,7 @@
 struct node
 {
     void * data;
-    int frequency;
+    long long int frequency;
     node* left;
     node* right;
 
@@ -16,7 +16,7 @@ struct node
 /*
 This function creates a node with the item and frequency given,poiting its left and right to the given nodes  
 */
-node* create_node(void * item, int freq, node* l, node* r);
+node* create_node(void * item, long long int freq, node* l, node* r);
 
 /*
 This function prints the tree in pre order
