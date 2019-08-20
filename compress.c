@@ -21,7 +21,19 @@ void print_tree_header(FILE *compressed_archive, node* tree)
 {
     if(tree != NULL)
     {
-        fprintf(compressed_archive,"%c", tree->data);
+        
+        if(tree->data == '*' && is_leaf(tree) || tree->data == '\\' && is_leaf(tree))
+        {
+
+            printf("\\%c", tree->data);
+            fprintf(compressed_archive,"\\%c", tree->data);
+        }
+        else
+        {
+            printf("%c", tree->data);
+            fprintf(compressed_archive,"%c", tree->data);
+        }
+        
         print_tree_header(compressed_archive,tree->left);
         print_tree_header(compressed_archive,tree->right);
     }
@@ -102,19 +114,13 @@ void int_to_bin(unsigned char *bin,int num, int bits)
 void compress(unsigned char *uncomp_archive_name)
 {
     FILE *archive=fopen(uncomp_archive_name,"rb");
-    fseek(archive, 0, SEEK_END);
-	int fileSize = ftell(archive);
-    printf("fileSize = %d\n", fileSize);
-	rewind(archive);
-    unsigned char* file_bin= malloc(sizeof(unsigned char)* fileSize);
-    fread(file_bin,1,fileSize,archive);
     unsigned char *comp_archive= malloc(sizeof(unsigned char) *100);
     strcat(uncomp_archive_name, ".huff");
     strcpy(comp_archive, uncomp_archive_name);
     FILE *compressed_archive=fopen(comp_archive,"wb");
     fprintf(compressed_archive, "00"); // Reserves the first 16 bits.*/
     heap*rip = create_heap();
-    check_frequency(file_bin, rip);
+    check_frequency(archive, rip);
    //print_heap(rip->size, rip);
     build_huff_tree(rip);
     hash *ht=create_hash_table();
@@ -122,7 +128,6 @@ void compress(unsigned char *uncomp_archive_name)
     navigate(rip->items[1],binary,0,ht);
 
     //tree_header
-    printf("%s\n", file_bin);
     int tree_sizeeesss=tree_size(rip->items[1]);
     printf(" tree size: %d\n", tree_sizeeesss);
     print_tree_header(compressed_archive, rip->items[1]);
@@ -151,7 +156,7 @@ void compress(unsigned char *uncomp_archive_name)
     
 
     //print_preorder(rip->items[1]);
-    //printf("\n");
+    printf("\n");
     print_hash(ht);
     printf("aqui\n");
     return;

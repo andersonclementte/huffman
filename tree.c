@@ -15,7 +15,7 @@ void print_preorder(node * tree)
 {
   if (tree) 
   {     
-    printf("( f:%d c:%c ",tree->frequency, tree->data);
+    printf("( f:%lld c:%c ",tree->frequency, tree->data);
     print_preorder(tree->left);
     print_preorder(tree->right);
     printf(") ");

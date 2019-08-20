@@ -12,7 +12,6 @@ int main()
     if (option == 1) {
       printf("Digite o nome do arquivo que deseja compactar:\n");
       scanf(" %[^\n]s", arquivo);
-      printf("%s\n", arquivo);
       compress(arquivo);
     } else if (option == 2) {
       printf("Not implemented yet\n");

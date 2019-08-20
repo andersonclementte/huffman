@@ -7,7 +7,7 @@ This function creates a 256 size array, each stance representing a caracter in t
 And stores the frequency of each one occurrence 
 After that it creates a node pointing to null containing the caracter and its frequency and enqueues the node in the heap
 */
-void check_frequency(unsigned char *str, heap *rip);
+void check_frequency(FILE *archive, heap *rip);
 
 /*
 This function receives two nodes and creates a new node that points to the given nodes

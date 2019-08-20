@@ -1,30 +1,26 @@
 #include "./header.h"
 #include "./huff.h"
 
-void check_frequency(unsigned char *str, heap *rip)
+void check_frequency(FILE *archive, heap *rip)
 {
+  
   long long int frequency = 0, i, lenght;
   int array_freq[256];
+  unsigned char aux;
   for(i=0;i<256;i++) 
   {
     array_freq[i]=0;
   }
-  unsigned char aux;
-  lenght=strlen(str);
-  printf("lenght = %d\n", lenght);
-  for ( i = 0; i < lenght; i++)
+  while (fscanf(archive, "%c", &aux)!=EOF)
   {
-    array_freq[str[i]]++;
+    
+        array_freq[aux]++;
   }
   for(i=0;i<256;i++)
   {
     if(array_freq[i]!=0)
     {
       aux=i;
-      if(aux == '*')
-      {
-        aux='\\*';
-      }
       node *new=create_node(aux,array_freq[i],NULL,NULL);
       enqueue(rip, new);
     }
@@ -63,9 +59,11 @@ int tree_size(node* tree)
   {
     return 0;
   }
-  else
+  if(tree->data == '*' && is_leaf(tree)|| tree->data == '\\' && is_leaf(tree))
   {
-    return 1+tree_size(tree->left)+tree_size(tree->right);
+    return 2;
   }
+    
+  return 1+tree_size(tree->left)+tree_size(tree->right);
   
 }
