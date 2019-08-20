@@ -102,12 +102,13 @@ void int_to_bin(unsigned char *bin,int num, int bits)
 void compress(unsigned char *uncomp_archive_name)
 {
     FILE *archive=fopen(uncomp_archive_name,"rb");
-    fseek(archive, 0L, SEEK_END);
+    fseek(archive, 0, SEEK_END);
 	int fileSize = ftell(archive);
+    printf("fileSize = %d\n", fileSize);
 	rewind(archive);
-    unsigned char* file_bin= malloc(sizeof(char)* fileSize);
+    unsigned char* file_bin= malloc(sizeof(unsigned char)* fileSize);
     fread(file_bin,1,fileSize,archive);
-    unsigned char *comp_archive= malloc(sizeof(char) *100);
+    unsigned char *comp_archive= malloc(sizeof(unsigned char) *100);
     strcat(uncomp_archive_name, ".huff");
     strcpy(comp_archive, uncomp_archive_name);
     FILE *compressed_archive=fopen(comp_archive,"wb");
@@ -152,6 +153,6 @@ void compress(unsigned char *uncomp_archive_name)
     //print_preorder(rip->items[1]);
     //printf("\n");
     print_hash(ht);
-
-    
+    printf("aqui\n");
+    return;
 }
