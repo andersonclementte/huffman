@@ -14,4 +14,4 @@ typedef struct heap heap;
 typedef struct element element;
 typedef struct hash hash;
 
-#define MAXSIZE 100000
+#define MAXSIZE 1000000
