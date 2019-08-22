@@ -25,12 +25,10 @@ void print_tree_header(FILE *compressed_archive, node* tree)
         if(tree->data == '*' && is_leaf(tree) || tree->data == '\\' && is_leaf(tree))
         {
 
-            printf("\\%c", tree->data);
             fprintf(compressed_archive,"\\%c", tree->data);
         }
         else
         {
-            printf("%c", tree->data);
             fprintf(compressed_archive,"%c", tree->data);
         }
         
@@ -124,12 +122,12 @@ void compress(unsigned char *uncomp_archive_name)
    //print_heap(rip->size, rip);
     build_huff_tree(rip);
     hash *ht=create_hash_table();
+    printf("Arvore criada!\n");
     unsigned char binary[8];
     navigate(rip->items[1],binary,0,ht);
 
     //tree_header
     int tree_sizeeesss=tree_size(rip->items[1]);
-    printf(" tree size: %d\n", tree_sizeeesss);
     print_tree_header(compressed_archive, rip->items[1]);
     unsigned char tree_header_size[13];
     int_to_bin(tree_header_size, tree_sizeeesss,13);
@@ -152,7 +150,7 @@ void compress(unsigned char *uncomp_archive_name)
     fclose(archive);
     fclose(compressed_archive);
 
-    printf("\nfunciona pfv");
+    printf("\nArquivo comprimido com sucesso!\n");
     
 
     //print_preorder(rip->items[1]);
