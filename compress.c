@@ -126,7 +126,9 @@ void compress(unsigned char *uncomp_archive_name)
     unsigned char binary[8];
     navigate(rip->items[1],binary,0,ht);
 
-    //tree_header
+    printf("Comprimindo, tenha paciencia pfv.\n");
+
+    //tree header
     int tree_sizeeesss=tree_size(rip->items[1]);
     print_tree_header(compressed_archive, rip->items[1]);
     unsigned char tree_header_size[13];

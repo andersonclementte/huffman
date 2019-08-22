@@ -13,16 +13,19 @@ node* create_node(void * item, long long int freq, node* l, node* r)
 
 void print_preorder(node * tree) 
 {
-  if (tree) 
+   if (tree) 
   {     
-    printf("( f:%lld c:%c ",tree->frequency, tree->data);
+
+    if(tree->data == '*' && is_leaf(tree) || tree->data == '\\' && is_leaf(tree))
+    {
+        printf("\\%c", tree->data);
+    }
+    else
+    {
+     printf("%c", tree->data);   
+    }
     print_preorder(tree->left);
     print_preorder(tree->right);
-    printf(") ");
-  }
-  else
-  {
-    printf("()");    
   }
 }
 
