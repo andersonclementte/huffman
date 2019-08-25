@@ -28,26 +28,30 @@ void decompress(unsigned char *compressed_archive_name)
 {
     unsigned char character;
     unsigned short trash_size, tree_size;
-    FILE *compressed_archive=fopen(compressed_archive_name, "rb");
+    FILE *compressed_archive = fopen(compressed_archive_name, "rb");
+    if (compressed_archive == NULL){
+		printf("Arquivo não encontrado\n");
+		return;
+	}
     fscanf(compressed_archive, "%c", &character);
 
-    trash_size= character>>5;
-    tree_size= character<<11;
+    trash_size = character>>5;
+    tree_size = character<<11;
     tree_size >>= 3;
 
     fscanf(compressed_archive, "%c", &character);
     tree_size |= character;
-    node* huff_tree= build_tree(huff_tree, compressed_archive);
-    node* huff_tree_aux= huff_tree;
+    node* huff_tree = build_tree(huff_tree, compressed_archive);
+    node* huff_tree_aux = huff_tree;
 
     unsigned char new_file[100];
-    int size=strlen(compressed_archive_name);
+    int size = strlen(compressed_archive_name);
     int i;
     for ( i = 0; i < size-5; i++)
     {
         new_file[i]=compressed_archive_name[i];
     }
-    new_file[i]='\0';
+    new_file[i] = '\0';
 
     long long int file_size;
 
@@ -56,9 +60,8 @@ void decompress(unsigned char *compressed_archive_name)
         file_size++;
     }
     fseeko(compressed_archive, 2+tree_size, SEEK_SET);
-    FILE *decompressed_file=fopen(new_file, "wb");
+    FILE *decompressed_file = fopen(new_file, "wb");
     
-    printf("Descomprimindo, tenha paciencia pfv.\n");
 
     while (file_size  > 0)
     {

@@ -17,7 +17,7 @@ unsigned char *get_new_bin(hash *ht, unsigned char c)
     return ht->table[c]->bin;
 }
 
-void print_tree_header(FILE *compressed_archive, node* tree)
+void print_tree_on_file(FILE *compressed_archive, node* tree)
 {
     if(tree != NULL)
     {
@@ -32,8 +32,8 @@ void print_tree_header(FILE *compressed_archive, node* tree)
             fprintf(compressed_archive,"%c", tree->data);
         }
         
-        print_tree_header(compressed_archive,tree->left);
-        print_tree_header(compressed_archive,tree->right);
+        print_tree_on_file(compressed_archive,tree->left);
+        print_tree_on_file(compressed_archive,tree->right);
     }
 }
 
@@ -112,6 +112,10 @@ void int_to_bin(unsigned char *bin,int num, int bits)
 void compress(unsigned char *uncomp_archive_name)
 {
     FILE *archive=fopen(uncomp_archive_name,"rb");
+    if (archive == NULL){
+		printf("Arquivo não encontrado\n");
+		return;
+	}
     unsigned char *comp_archive= malloc(sizeof(unsigned char) *100);
     strcat(uncomp_archive_name, ".huff");
     strcpy(comp_archive, uncomp_archive_name);
@@ -126,11 +130,10 @@ void compress(unsigned char *uncomp_archive_name)
     unsigned char binary[8];
     navigate(rip->items[1],binary,0,ht);
 
-    printf("Comprimindo, tenha paciencia pfv.\n");
 
     //tree header
     int tree_sizeeesss=tree_size(rip->items[1]);
-    print_tree_header(compressed_archive, rip->items[1]);
+    print_tree_on_file(compressed_archive, rip->items[1]);
     unsigned char tree_header_size[13];
     int_to_bin(tree_header_size, tree_sizeeesss,13);
     //trash header
