@@ -52,11 +52,10 @@ void heap_test() {
 void huff_test() {
 	
 	//testando check_frequency
-	unsigned char str[23]="AAAAAABBBBBCCCCDDDEEF ";
+	FILE *test = fopen("test.txt", "r");
 	heap *riptest=create_heap();
-	check_frequency(str,riptest);
-	print_heap(riptest->size, riptest);
-	CU_ASSERT('F'==(unsigned char)riptest->items[1]->data);
+	check_frequency(test,riptest);
+	CU_ASSERT('F'==riptest->items[1]->data);
 	CU_ASSERT(1 == riptest->items[1]->frequency);
 	CU_ASSERT('E' == riptest->items[3]->data);
 	CU_ASSERT(2 == riptest->items[3]->frequency);
