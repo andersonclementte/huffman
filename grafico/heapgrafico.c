@@ -1,18 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include <stdlib.h>
-#include <limits.h>
- 
-#define MAXSIZE 100000
- 
-typedef struct heap heap;
- 
-struct heap
-{
-    int size;
-    int items[MAXSIZE];
-};
+#include "fila.h"
+#include "heap.h"
+
  
 heap * create_heap()
 {
@@ -30,7 +18,7 @@ void swap(int *a, int *b)
 
 }
 
-int isempty(heap *rip)
+int isempty_heap(heap *rip)
 {
     if(rip->size<=0)
     {
@@ -63,7 +51,7 @@ int heap_item(heap * rip, int i)
     return rip->items[i];
 }
 
-void max_heapfy(heap *rip, int i)
+void max_heapfy(heap *rip, int i, int *counter)
 {
     int greatest;
     int leftindex = left_child(i);
@@ -83,19 +71,18 @@ void max_heapfy(heap *rip, int i)
     if (rip->items[i] != rip->items[greatest]) 
     {
         swap(&rip->items[i], &rip->items[greatest]);
-        max_heapfy(rip, greatest);
-        //aqui
+        (*counter)++;
+        max_heapfy(rip, greatest, counter);
     }
 }
 
-void build_max_heap(heap* rip)
+void build_max_heap(heap* rip, int *counter)
 {  
     int i;
     for ( i = rip->size/2; i >= 1; i--)
     {
-        max_heapfy(rip, i);
-    }
-   
+        max_heapfy(rip, i, counter);
+    }  
 }
 
  void print_heap(int n, heap * rip)
@@ -104,7 +91,7 @@ void build_max_heap(heap* rip)
     int num;
     printf("Heap current state: ");
     
-    if(!isempty(rip))
+    if(!isempty_heap(rip))
     {
         for ( i = 1; i <= n-1; i++)
         {
@@ -127,7 +114,7 @@ void build_max_heap(heap* rip)
     
 }
 
-void enqueue(heap *rip, int item)
+void enqueue(heap *rip, int item, int *counter)
 {
     if(rip->size>=MAXSIZE)
     {
@@ -138,63 +125,6 @@ void enqueue(heap *rip, int item)
         rip->items[++rip->size]=item;
         int index=rip->size;
         int daddy_index=daddy(rip->size);
-        build_max_heap(rip);
-        
-
+        build_max_heap(rip, counter);
     }
-    
-}
-
-int dequeue(heap * rip)
-{
-    if(isempty(rip))
-    {
-        printf("underflow\n");
-        return -1000;
-    }
-    else
-    {
-        int item=rip->items[1];
-        rip->items[1]=rip->items[rip->size];
-        rip->size--;
-        max_heapfy(rip, 1);
-        return item;
-
-    }
-    
-}
- 
-int main()
-{
-    printf("Insert heap size\n");
-    int tam, d;
-    scanf("%d", &tam);
-    int* array;
-    array=malloc(sizeof(int)*tam+1);
-    int n=1, i;
-    heap *rip=create_heap();
-    for ( i = 1; i <= tam; i++)
-    {
-        scanf("%d", &d);
-        array[i]=d;
-    }
-    
-
-    printf("Initial state:");
-    for ( i = 1; i <tam; i++)
-    {
-        printf(" %d |", array[i]);
-        enqueue(rip, array[i]);
-    }
-    printf(" %d", array[i]);
-     printf("\n");
-    enqueue(rip, array[i]);
-    print_heap(rip->size, rip);
-    n=dequeue(rip);
-    printf("dequeued :%d\n", n);
-    print_heap(rip->size, rip);
-    n=dequeue(rip);
-     printf("dequeued :%d\n", n);
-    print_heap(rip->size, rip);
-   
 }

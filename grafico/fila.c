@@ -1,15 +1,10 @@
 
 // C code to implement Priority Queue 
 // using Linked List 
-#include <stdio.h> 
-#include <stdlib.h> 
-  
-// Node 
-typedef struct node { 
-    int data; 
-    struct node* next; 
-  
-} Node; 
+
+#include "fila.h"
+#include "heap.h"
+
   
 // Function to Create A New Node 
 Node* newNode(int d) 
@@ -21,6 +16,12 @@ Node* newNode(int d)
     return temp; 
 } 
   
+// Function to check is list is empty 
+int isEmpty_queue(Node** head) 
+{ 
+    return (*head) == NULL; 
+} 
+
 // Return the value at head 
 int peek(Node** head) 
 { 
@@ -37,7 +38,7 @@ void pop(Node** head)
 } 
   
 // Function to push according to priority 
-void push(Node** head, int d) 
+void push(Node** head, int d, int *counter) 
 { 
     Node* start = (*head); 
   
@@ -57,10 +58,11 @@ void push(Node** head, int d)
   
         // Traverse the list and find a 
         // position to insert new node 
-        while (start->next != NULL && 
-               start->next->data > d) { 
+        while (start->next != NULL && start->next->data > d) { 
             start = start->next; 
-        } //aqui
+            (*counter)++;
+            //printf("-- %d --\n", *counter);
+        }
   
         // Either at the ends of the list 
         // or at required position 
@@ -68,26 +70,4 @@ void push(Node** head, int d)
         start->next = temp; 
     } 
 } 
-  
-// Function to check is list is empty 
-int isEmpty(Node** head) 
-{ 
-    return (*head) == NULL; 
-} 
-  
 // Driver code 
-int main() 
-{ 
-    // Create a Priority Queue 
-    Node* pq = newNode(4); 
-    push(&pq, 5); 
-    push(&pq, 6); 
-    push(&pq, 7); 
-  
-    while (!isEmpty(&pq)) { 
-        printf("%d ", peek(&pq)); 
-        pop(&pq); 
-    } 
-  
-    return 0; 
-} 
